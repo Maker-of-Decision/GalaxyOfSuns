@@ -14,10 +14,20 @@ async function main() {
     password: process.env.BLUESKY_PASSWORD!,
   });
   await agent.post({
-    text: '🙂',
+    text: 'Testing the Glaxy of Suns',
   });
   console.log('Just posted!');
 }
 
 const job = new CronJob('0 */3 * * *', main);
 job.start();
+
+export default async function handler(req: any, res: any) {
+  res.status(2000).send('Bot is running');
+}
+
+// Optionally, start the bot here if required
+(async () => {
+  console.log('Starting bot...');
+  await main(); // Call your bot logic function
+})();
