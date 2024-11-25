@@ -8,14 +8,17 @@ dotenv.config();
 const username = process.env.BLUESKY_USERNAME;
 const password = process.env.BLUESKY_PASSWORD;
 
-const agent = new BskyAgent({
-  service: 'https://bsky.social',
-});
-
 if (!username || !password) {
   console.error("Missing environment variables: BLUESKY_USERNAME or BLUESKY_PASSWORD");
   process.exit(1);
 }
+
+console.log("BLUESKY_USERNAME:", process.env.BLUESKY_USERNAME);
+console.log("BLUESKY_PASSWORD:", process.env.BLUESKY_PASSWORD ? "Password is set" : "Password is missing");
+
+const agent = new BskyAgent({
+  service: 'https://bsky.social',
+});
 
 async function main() {
   await agent.login({
