@@ -4,17 +4,29 @@ import { CronJob } from 'cron';
 
 dotenv.config();
 
+// Use environment variables
+const username = process.env.BLUESKY_USERNAME;
+const password = process.env.BLUESKY_PASSWORD;
+
 const agent = new BskyAgent({
   service: 'https://bsky.social',
 });
+
+if (!username || !password) {
+  console.error("Missing environment variables: BLUESKY_USERNAME or BLUESKY_PASSWORD");
+  process.exit(1);
+}
 
 async function main() {
   await agent.login({
     identifier: process.env.BLUESKY_USERNAME!,
     password: process.env.BLUESKY_PASSWORD!,
   });
+
+ console.log(`Logging in as ${process.env.BLUESKY_USERNAME}`); // Corrected logging
+
   await agent.post({
-    text: 'Testing the Glaxy of Suns',
+    text: 'Testing the Galaxy of Suns',
   });
   console.log('Just posted!');
 }
