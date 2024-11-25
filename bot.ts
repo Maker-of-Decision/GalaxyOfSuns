@@ -19,8 +19,7 @@ if (!username || !password) {
 
 async function main() {
   await agent.login({
-    identifier: process.env.BLUESKY_USERNAME!,
-    password: process.env.BLUESKY_PASSWORD!,
+    identifier: process.env.BLUESKY_USERNAME!, password: process.env.BLUESKY_PASSWORD!,
   });
 
  console.log(`Logging in as ${process.env.BLUESKY_USERNAME}`); // Corrected logging
@@ -35,7 +34,7 @@ const job = new CronJob('0 */3 * * *', main);
 job.start();
 
 export default async function handler(req: any, res: any) {
-  res.status(2000).send('Bot is running');
+  res.status(200).send('Bot is running');
 }
 
 // Optionally, start the bot here if required
